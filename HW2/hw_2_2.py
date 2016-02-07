@@ -16,5 +16,3 @@ def bmi(weight,height):
 #Q5
 def investmentVal(amount, annualRate, years):
   return round(amount*(1+(annualRate/(12*100)))**(years*12), 2)
-
-print investmentVal(1000,4.25,1)
