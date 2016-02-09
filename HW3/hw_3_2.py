@@ -106,28 +106,31 @@ def getEvenNumber(numbers):
 def isPrime(n):
   if n == 2: return True
   if n == 3: return True
-  for i in range(1,int(n**0.5)):
+  for i in range(1,int(n/2)):
     if n==(6*i+1) or n==(6*i-1):
       return True
   return False
 
 
-# print 'isPrime(2)' 
-# ans=isPrime(2) 
-# print ans
-# print 'isPrime(3)' 
-# ans=isPrime(3) 
-# print ans
-# print 'isPrime(7)' 
-# ans=isPrime(7) 
-# print ans
-# print 'isPrime(9)' 
-# ans=isPrime(9) 
-# print ans
-# print 'isPrime(21)'
-# ans=isPrime(21) 
-# print ans
-
+print 'isPrime(2)' 
+ans=isPrime(2) 
+print ans
+print 'isPrime(3)' 
+ans=isPrime(3) 
+print ans
+print 'isPrime(7)' 
+ans=isPrime(7) 
+print ans
+print 'isPrime(9)' 
+ans=isPrime(9) 
+print ans
+print 'isPrime(21)'
+ans=isPrime(21) 
+print ans
+print isPrime(1231)
+print isPrime(3499)
+print isPrime(1)
+print isPrime(0)
 #Q5 - This methond has some very peculiar behaviour, ask teacher
 # from math import e
 # def approx_ode(t,h):
@@ -143,8 +146,31 @@ def approx_ode(t,h):
   x = 0
   for n in range(int(t/h)):
     y += (3+e**(-x)-(0.5*y))*h
-    x += h
+    tn += h
   return round(y,3)
-print approx_ode(3,0.1)
-print approx_ode(4,0.1)
-print approx_ode(5,0.1)
+# print approx_ode(3,0.1)
+# print approx_ode(4,0.1)
+# print approx_ode(5,0.1)
+###### This is the code for tutor....####
+# import math
+# def approx_ode(h,t0,y0,tn):
+######### h - step size
+######### t0 - initial t value (at step 0)
+######### y0 - initial y value (at step 0)
+######### tn - t value at step n
+
+######### Add you code below this line
+######### Return your answer correct to 3 decimal places
+  # x = t0
+  # for n in range(int(tn/h)):
+  #   y0 += (3+math.e**(-x)-(0.5*y0))*h
+  #   x += h
+  # return round(y0,3)
+
+
+######### Ignore code below this line ######################################
+
+# def f(t, y):
+#     return 3.0+math.exp(-t)-0.5*y
+
+

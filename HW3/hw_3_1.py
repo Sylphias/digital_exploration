@@ -7,26 +7,26 @@
 #   case 2: Print  y + if statement
 #   case 3: print x
 
-def letterGrade(marks):
-    if(marks < 100 and marks >=90 ):
-      return "A"
-    elif(marks < 80):
-      return "B"
-    elif(marks < 70 ):
-      return "C"
-    elif(marks < 60):
-      return "D"
-    elif(marks < 50): 
-      return "E"
-    else:
-      return "None"
+def letterGrade(mark):
+  if(mark < 0 or mark> 100):
+    return "None"
+  if(mark >=90 ):
+    return "A"
+  elif(mark >= 80):
+    return "B"
+  elif(mark >= 70 ):
+    return "C"
+  elif(mark >= 60):
+    return "D"
+  else: 
+    return "E"
 
 
 # print letterGrade(102) 
 # print letterGrade(100) 
-# print letterGrade(83) 
-# print letterGrade(75) 
-# print letterGrade(67) 
+# print letterGrade(80) 
+# print letterGrade(70) 
+# print letterGrade(60) 
 # print letterGrade(52) 
 # print letterGrade(-2) 
 
@@ -38,11 +38,11 @@ def check1(n1,n2):
 # print check1(-1,2)
 # print check1(2,2)
 
-def listSum(listValues):
+def listSum(a):
   total = 0
-  for l in listValues:
+  for l in a:
     total += l
-  return total
+  return round(total,1)
 
 # print ("Test case 1: [4.25,5.0,10.75]") 
 # ans=listSum([4.25,5.0,10.75])
@@ -68,7 +68,7 @@ def listSum(listValues):
 
 def maxList(listValues):
   if len(listValues)== 0 :
-    return "None", "None" 
+    return None, None 
   max_value = listValues[0]
   min_value = listValues[0]
   for n in listValues:
@@ -76,7 +76,7 @@ def maxList(listValues):
       max_value = n   
     if min_value > n :
       min_value = n 
-  return max_value, min_value
+  return min_value, max_value
 
 # print ("Test case 1: [1,2,3,4,5]")
 # ans=maxList([1,2,3,4,5])
