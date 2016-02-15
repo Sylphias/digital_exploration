@@ -112,45 +112,46 @@ def isPrime(n):
   return False
 
 
-print 'isPrime(2)' 
-ans=isPrime(2) 
-print ans
-print 'isPrime(3)' 
-ans=isPrime(3) 
-print ans
-print 'isPrime(7)' 
-ans=isPrime(7) 
-print ans
-print 'isPrime(9)' 
-ans=isPrime(9) 
-print ans
-print 'isPrime(21)'
-ans=isPrime(21) 
-print ans
-print isPrime(1231)
-print isPrime(3499)
-print isPrime(1)
-print isPrime(0)
+# print 'isPrime(2)' 
+# ans=isPrime(2) 
+# print ans
+# print 'isPrime(3)' 
+# ans=isPrime(3) 
+# print ans
+# print 'isPrime(7)' 
+# ans=isPrime(7) 
+# print ans
+# print 'isPrime(9)' 
+# ans=isPrime(9) 
+# print ans
+# print 'isPrime(21)'
+# ans=isPrime(21) 
+# # print ans
+# print isPrime(1231)
+# print isPrime(3499)
+# print isPrime(1)
+# print isPrime(0)
 #Q5 - This methond has some very peculiar behaviour, ask teacher
-# from math import e
-# def approx_ode(t,h):
-#   y = 1
-#   x = 0
-#   while(x < t): #This while loop only overshots on the last run.... ask why
-#     y += (3+e**(-x)-(0.5*y))*h
-#     x += h
-#   return round(y,3)
 from math import e
 def approx_ode(t,h):
   y = 1
   x = 0
-  for n in range(int(t/h)):
+  while(x < t): #This while loop only overshots on the last run.... ask why
     y += (3+e**(-x)-(0.5*y))*h
-    tn += h
+    x += h
+    print x
   return round(y,3)
-# print approx_ode(3,0.1)
-# print approx_ode(4,0.1)
-# print approx_ode(5,0.1)
+# from math import exp
+# def approx_ode(t,h):
+#   y = 1
+#   x = 0
+#   for n in range(int(t/h)):
+#     y += (3+exp(-x)-(0.5*y))*h
+#     x += h
+#   return round(y,3)
+print approx_ode(3,0.1)
+print approx_ode(4,0.1)
+print approx_ode(5,0.1)
 ###### This is the code for tutor....####
 # import math
 # def approx_ode(h,t0,y0,tn):
