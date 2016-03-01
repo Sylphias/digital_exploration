@@ -49,41 +49,21 @@ def numDaysInMonth(month_num,leap_year):
     return (28 + leap_year) if month_num == 2 else 31 - (month_num - 1) % 7 % 2;
 
 def constructCalMonth(month_num, first_day_of_month, num_days_in_month):
-  calendar = [cal_year[month_num-1]]
-  first_row= ' '
-  day = 1
-  if first_day_of_month!=0:
-    for x in range(7):
-      if x<first_day_of_month:
-        first_row +='   '
-      elif x == 6: 
-        first_row +=str(day)
-        day+=1
-      else:
-        first_row +=str(day) + '  '
-        day +=1
-    calendar += [first_row]
- 
-  row = ''
-  day_counter =1
-  for y in range(day,num_days_in_month+1):
-    if y<=9:
-      if day_counter%7==0:
-        row += ' '+str(y)
-        calendar += [row]
-        row =''
-      else:
-        row +=' '+str(y)+' '
-    else:
-      if day_counter%7==0 or y == num_days_in_month:
-        row+= str(y)
-        calendar +=[row]
-        row =''
-      else:
-        row += str(y)+' '
-    day_counter+=1
+    day = first_day_of_month #keep count of the day
+    date = 0 #Keep count of the date
+    CalMonth = [cal_year[month_num - 1]] #initialize the list w/ first element being the name of month
+    week = (first_day_of_month*3) * ' ' #Add in spaces to format the first week
+    while date < num_days_in_month: #Make sure that the first day of the next week we add does not exceed no. of days in month
+        while day <= 6 and date < num_days_in_month: #For the first week. If it is any other week, this while block will be skipped
+            week += ' %2d' %(date+1) #Add in 2 spaces and then the date
+            day += 1 #update the day of the week
+            date += 1 #update the date of the month
+        CalMonth.append(week[1:]) #add on the first week
+        day = 0 #reset the day for the 2nd week onwards
+        week = '' #reset the week for the 2nd week onwards
+    return CalMonth #return the list of strings containing the month and each week for that month
 
-  return calendar
+print constructCalMonth(1,3,31)
 
 
 def constructCalYear(year):
