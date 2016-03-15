@@ -41,7 +41,7 @@ def fundamentalConstants(f):
   constants = [x.split() for x in f.readlines()]
   return {c[0]:float(c[1]) for c in constants[2:]}
 
-# print fundamentalConstants(f)
+print fundamentalConstants(f)
 f=open('scores.txt')
 def scores(f):
   scores = [float(x.strip()) for x in f.readlines() if x !='\n']
