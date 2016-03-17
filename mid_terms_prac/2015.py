@@ -71,6 +71,7 @@ def findConflict(dictSchedule):
 # print findLength(n)
 # print findConflict(n)
 
+
 def countLitPixel(cx,cy,r):
   count = 0
   for x in range(r):
@@ -79,5 +80,5 @@ def countLitPixel(cx,cy,r):
         count+=1
   return count*4
 
-# print countLitPixel(5,2,5)
-# print countLitPixel(1,1,1)
+print countLitPixel(5,2,5)
+print countLitPixel(1,1,1)
