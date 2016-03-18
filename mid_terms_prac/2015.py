@@ -48,7 +48,7 @@ def findLength(dictSchedule):
   for key,value in dictSchedule.iteritems():
     total = 0
     for x in value:
-      total +=sum(x)
+      total += x[1]-x[0]
     findLength[key] = total 
   return findLength
 
@@ -67,9 +67,9 @@ def findConflict(dictSchedule):
           break
   return conflict
 
-# n = getSchedule(f)
-# print findLength(n)
-# print findConflict(n)
+n = getSchedule(f)
+print findLength(n)
+print findConflict(n)
 
 
 def countLitPixel(cx,cy,r):
