@@ -54,7 +54,6 @@ def findLength(dictSchedule):
 
 def findConflict(dictSchedule):
   conflict = {}
-  old_value =()
   for key,value in dictSchedule.iteritems():
     count = 0
     conflict[key] = False
@@ -62,7 +61,7 @@ def findConflict(dictSchedule):
       count +=1
       start,end = x
       for y in range(count,len(value)):
-        if (start<= value[y][1] and start >= value[y][0] )or (end<= value[y][1] and end >= value[y][0]):
+        if (start< value[y][1] and start > value[y][0] ) or (end< value[y][1] and end > value[y][0]):
           conflict[key] = True
           break
   return conflict
@@ -80,5 +79,5 @@ def countLitPixel(cx,cy,r):
         count+=1
   return count*4
 
-print countLitPixel(5,2,5)
-print countLitPixel(1,1,1)
+# print countLitPixel(5,2,5)
+# print countLitPixel(1,1,1)
