@@ -45,12 +45,12 @@ def distance(d,s):
   #find where mrt1 lies
   for values in d.values():
     if mrt1 in values:
-      if mrt2 in values:
+      if mrt2 in values: #Check if MRT 2 is in same list as MRT 1
+        #Just compare the index number within the list of the 2 stations and return the distance
         return abs(values.index(mrt1)-values.index(mrt2)) # refactored
       else:
         return -1
-
-
+  return -1
 
 def test(): 
   f =open("mrt.txt", "r") 
