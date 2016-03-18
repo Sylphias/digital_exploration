@@ -46,19 +46,7 @@ def distance(d,s):
   for values in d.values():
     if mrt1 in values:
       if mrt2 in values:
-        start_counting = False   
-        other_mrt = ""
-        for x in values:
-          #inefficient, refactor later
-          if start_counting: count += 1
-          if x == other_mrt:
-            return count
-          if x == mrt2:
-            start_counting =True
-            other_mrt = mrt1
-          if x == mrt1:
-            start_counting =True
-            other_mrt = mrt2
+        return abs(values.index(mrt1)-values.index(mrt2)) # refactored
       else:
         return -1
 
@@ -79,7 +67,8 @@ def test():
   f.close()
 
 
-# test
+test()
+
 
 
 class Matrix:
@@ -121,19 +110,19 @@ class Matrix:
     return  True
 
 
-m1=[[1,4,0,0],[3, 4, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
-a=Matrix(m1)
-print a.triDiag()
-print a
+# m1=[[1,4,0,0],[3, 4, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
+# a=Matrix(m1)
+# print a.triDiag()
+# print a
 
-m2=[[1,0,0,0], [3, 4, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
-a=Matrix(m2)
-print a.lowerDiag()
-print a.upperDiag()
+# m2=[[1,0,0,0], [3, 4, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
+# a=Matrix(m2)
+# print a.lowerDiag()
+# print a.upperDiag()
 
-m3=[[1,4,0,0], [3, 0, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
-a=Matrix(m3, "DW Matrix", "%6.1f")
-print a
+# m3=[[1,4,0,0], [3, 0, 1, 0], [0, 2, 3, 4], [0,0,1,3]]
+# a=Matrix(m3, "DW Matrix", "%6.1f")
+# print a
 
 
 
