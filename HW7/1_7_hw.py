@@ -97,59 +97,64 @@ from scipy.special import legendre
 # def legendre(l):
 #   f = np.poly1d([1,0,-1])**l
 #   return (1/float(2**l)*fact(l))*(n_derive(l,f))*f
-
+#mnew thing learned, closures.
 def assocLegendre(m,l):
-  derivative = np.polyder(legendre(l),m)
+  derivative = np.polyder(legendre(l),m) #this part is executed only when f(x) is called
   def eqn_1(theta):
     x = np.cos(theta)
-    return ((1-x*x)**(np.absolute(m)/2.0))*derivative(x)
+    return ((1-x*x)**(np.absolute(m)/2.0))*derivative(x) # x is passed into the derivative and resolved
   return eqn_1
 
 
-print 'f=assocLegendre(0,0)' 
-print 'f(1)' 
-f=assocLegendre(0,0) 
-ans=f(1)
-print ans
-
-print 'f=assocLegendre(1,1)' 
-print 'f(1)' 
-f=assocLegendre(1,1) 
-ans=f(1)
-print ans
-
-print 'f=assocLegendre(2,3)' 
-print 'f(1)' 
-f=assocLegendre(2,3) 
-ans=f(1)
-print ans
-
-print 'f=assocLegendre(2,3)' 
-print 'f(0)' 
-f=assocLegendre(2,3) 
-ans=f(0)
-print ans
-
-# print 'f=assocLaguerre(0,0)' 
+# print 'f=assocLegendre(0,0)' 
 # print 'f(1)' 
-# f=assocLaguerre(0,0) 
+# f=assocLegendre(0,0) 
 # ans=f(1)
 # print ans
-# print 'f=assocLaguerre(1,1)' 
+
+# print 'f=assocLegendre(1,1)' 
 # print 'f(1)' 
-# f=assocLaguerre(1,1) 
+# f=assocLegendre(1,1) 
 # ans=f(1)
 # print ans
-# print 'f=assocLaguerre(2,2)' 
+
+# print 'f=assocLegendre(2,3)' 
 # print 'f(1)' 
-# f=assocLaguerre(2,2) 
+# f=assocLegendre(2,3) 
 # ans=f(1)
 # print ans
-# print 'f=assocLaguerre(2,2)' 
+
+# print 'f=assocLegendre(2,3)' 
 # print 'f(0)' 
-# f=assocLaguerre(2,2) 
+# f=assocLegendre(2,3) 
 # ans=f(0)
 # print ans
+
+from scipy.special import laguerre
+def assocLaguerre(p,qmp):
+  der = np.polyder(laguerre(p+qmp, True), p )
+  return ((-1)**p)*der if qmp else der
+
+print 'f=assocLaguerre(0,0)' 
+print 'f(1)' 
+f=assocLaguerre(0,0) 
+ans=f(1)
+print ans
+print 'f=assocLaguerre(1,1)' 
+print 'f(1)' 
+f=assocLaguerre(1,1) 
+ans=f(1)
+print ans
+print 'f=assocLaguerre(2,2)' 
+print 'f(1)' 
+f=assocLaguerre(2,2) 
+ans=f(1)
+print ans
+print 'f=assocLaguerre(2,2)' 
+print 'f(0)' 
+f=assocLaguerre(2,2) 
+ans=f(0)
+print ans
 
 
 
