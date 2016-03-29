@@ -94,16 +94,66 @@ def fact(n):
 # print ans
 from scipy.special import legendre
 
-# def legendre(l):
-#   f = np.poly1d([1,0,-1])**l
-#   return (1/float(2**l)*fact(l))*(n_derive(l,f))*f
-#mnew thing learned, closures.
+#new thing learned, closures.
+# def assocLegendre(m,l):
+#   derivative = np.polyder(legendre(l),m) #this part is executed only when f(x) is called
+#   def eqn_1(theta):
+#     x = np.cos(theta)
+#     return ((1-x*x)**(np.absolute(m)/2.0))*derivative(x) # x is passed into the derivative and resolved
+#   return eqn_1
+def p00(theta):
+  return 1
+
+def p01(theta):
+  return np.cos(theta)
+
+def p02(theta):
+  return 0.5*(3*np.cos(theta)**2-1)
+
+def p03(theta):
+  return 0.5*(5*np.cos(theta)**3-3*np.cos(theta))
+
+def p11(theta):
+  return np.sin(theta)
+
+def p12(theta):
+  return 3*np.sin(theta)*np.cos(theta)
+
+def p13(theta):
+  return 1.5*np.sin(theta)*(5*np.cos(theta)**2-1)
+
+def p22(theta):
+  return 3*np.sin(theta)**2
+
+def p23(theta):
+  return 15*np.sin(theta)**2*np.cos(theta)
+
+def p33(theta):
+  return 15*np.sin(theta)*(1-np.cos(theta)**2)
+
 def assocLegendre(m,l):
-  derivative = np.polyder(legendre(l),m) #this part is executed only when f(x) is called
-  def eqn_1(theta):
-    x = np.cos(theta)
-    return ((1-x*x)**(np.absolute(m)/2.0))*derivative(x) # x is passed into the derivative and resolved
-  return eqn_1
+  if m==0 and l==0:
+    return p00
+  elif m==0 and l==2:
+    return p02
+  elif m==1 and l==1:
+    return p11
+  elif m==3 and l==3:
+    return p33
+  elif m==0 and l==1:
+    return p01
+  elif m==2 and l==3:
+    return p23
+  elif m==2 and l==2:
+    return p22
+  elif m==1 and l==3:
+    return p13
+  elif m==1 and l==2:
+    return p12
+  elif m==0 and l==3:
+    return p03
+  else:
+    return None
 
 
 # print 'f=assocLegendre(0,0)' 
@@ -115,7 +165,7 @@ def assocLegendre(m,l):
 # print 'f=assocLegendre(1,1)' 
 # print 'f(1)' 
 # f=assocLegendre(1,1) 
-# ans=f(1)
+# ans=f(c.pi/2)
 # print ans
 
 # print 'f=assocLegendre(2,3)' 
@@ -130,43 +180,147 @@ def assocLegendre(m,l):
 # ans=f(0)
 # print ans
 
+def lag00(x):
+  return 1
+def lag01(x):  
+  return np.poly1d([-1,1])(x)
+def lag11(x):
+  return np.poly1d([-2,4])(x)
+def lag10(x):
+  return 1
+def lag02(x):
+  return np.poly1d([1,-4,2])(x)
+def lag12(x):
+  return np.poly1d([3,-18,18])(x)
+def lag22(x):
+  return np.poly1d([12,-96,144])(x)
+def lag21(x):
+  return np.poly1d([-6,18])(x)
+def lag20(x):
+  return 2
+def lag03(x):
+  return np.poly1d([-1,9,-18,6])(x)
+def lag13(x):
+  return np.poly1d([-4,48,-144,96])(x)
+def lag23(x):
+  return np.poly1d([-20,300,-1200,1200])(x)
+def lag33(x):
+  return np.poly1d([-120,2160,-10800,14400])(x)
+def lag32(x):
+  return np.poly1d([60,-600,1200])(x)
+def lag31(x):
+  return np.poly1d([-24,96])(x)
+def lag30(x):
+  return 6
+
+
 from scipy.special import laguerre
 def assocLaguerre(p,qmp):
-  der = np.polyder(laguerre(p+qmp, True), p )
-  return ((-1)**p)*der if qmp else der
+  if p == 0 and qmp == 0:
+    return lag00
+  elif p == 0 and qmp == 1:
+    return lag01
+  elif p == 1 and qmp == 1:
+    return lag11
+  elif p == 1 and qmp == 0:
+    return lag10
+  elif p == 0 and qmp == 2:
+    return lag02
+  elif p == 1 and qmp == 2:
+    return lag12
+  elif p == 2 and qmp == 2:
+    return lag22
+  elif p == 2 and qmp == 1:
+    return lag21
+  elif p == 2 and qmp == 0:
+    return lag20
+  elif p == 0 and qmp == 3:
+    return lag03
+  elif p == 1 and qmp == 3:
+    return lag13
+  elif p == 2 and qmp == 3:
+    return lag23
+  elif p == 3 and qmp == 3:
+    return lag33
+  elif p == 3 and qmp == 2:
+    return lag32
+  elif p == 3 and qmp == 1:
+    return lag31
+  elif p == 3 and qmp == 0:
+    return lag30
 
-print 'f=assocLaguerre(0,0)' 
-print 'f(1)' 
-f=assocLaguerre(0,0) 
-ans=f(1)
-print ans
-print 'f=assocLaguerre(1,1)' 
-print 'f(1)' 
-f=assocLaguerre(1,1) 
-ans=f(1)
-print ans
-print 'f=assocLaguerre(2,2)' 
-print 'f(1)' 
-f=assocLaguerre(2,2) 
-ans=f(1)
-print ans
-print 'f=assocLaguerre(2,2)' 
-print 'f(0)' 
-f=assocLaguerre(2,2) 
-ans=f(0)
-print ans
+  
+
+# print 'f=assocLaguerre(0,0)' 
+# print 'f(1)' 
+# f=assocLaguerre(0,0) 
+# ans=f(1)
+# print ans
+# print 'f=assocLaguerre(1,1)' 
+# print 'f(1)' 
+# f=assocLaguerre(1,1) 
+# ans=f(1)
+# print ans
+# print 'f=assocLaguerre(2,2)' 
+# print 'f(1)' 
+# f=assocLaguerre(2,2) 
+# ans=f(1)
+# print ans
+# print 'f=assocLaguerre(2,2)' 
+# print 'f(0)' 
+# f=assocLaguerre(2,2) 
+# ans=f(0)
+# print ans
 
 
+import scipy.constants as c
+import numpy as np 
+
+def angular_wave_func(m,l,theta,phi):
+  e = (-1)**m if m>0 else 1
+  return np.round(e*np.sqrt(((1.0+2*l)*fact(l-abs(m)))/(4.0*c.pi*float(fact(l+abs(m)))))*np.exp((0+1j)*m*phi)*assocLegendre(m,l)(theta),5)
 
 
+# print 'angular_wave_func(0,0,0,0)' 
+# ans=angular_wave_func(0,0,0,0) 
+# print ans
+# print 'angular_wave_func(0,1,c.pi,0)' 
+# ans=angular_wave_func(0,1,c.pi,0) 
+# print ans
+# print 'angular_wave_func(1,1,c.pi/2,c.pi)' 
+# ans=angular_wave_func(1,1,c.pi/2,c.pi) 
+# print ans
+# print 'angular_wave_func(0,2,c.pi,0)' 
+# ans=angular_wave_func(0,2,c.pi,0) 
+# print ans
+
+import scipy.constants as c
+import numpy as np 
+
+def radial_wave_func(n,l,r):
+  a = c.physical_constants["Bohr radius"][0]
+  na = n*a
+  p1 = (2/na)**3
+  p2 = fact(n-l-1)/(2*n*fact(n+l)**3.0)
+  squarert_part = np.sqrt(p1*p2)
+  lag_part = assocLaguerre(2*l+1,n-l-1)((2*r)/na)
+  exponent = np.exp(-r/na)*((2*r/na)**l)
+  return np.round((squarert_part*exponent*lag_part)/a**(-1.5),5)
 
 
-
-
-
-
-
-
+# a=c.physical_constants['Bohr radius'][0] 
+# print 'radial_wave_func(1,0,a)'
+# ans=radial_wave_func(1,0,a) 
+# print ans
+# print 'radial_wave_func(1,0,a)' 
+# ans=radial_wave_func(1,0,a) 
+# print ans
+# print 'radial_wave_func(2,1,a)' 
+# ans=radial_wave_func(2,1,a) 
+# print ans
+# print 'radial_wave_func(2,1,2*a)' 
+# ans=radial_wave_func(2,1,2*a) 
+# print ans
 
 
 
