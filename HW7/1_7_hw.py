@@ -80,6 +80,16 @@ def fact(n):
   if n == 0: return 1 
   return n*fact(n-1)
 
+# def fact(n):
+#   print n
+#   total = 0
+#   for x in range(n):
+#     print total
+#     print x
+#     total*=(x+1)
+
+  return total
+
 # print 'fact(3)'
 # ans=fact(3) 
 # print ans
@@ -322,17 +332,65 @@ def radial_wave_func(n,l,r):
 # ans=radial_wave_func(2,1,2*a) 
 # print ans
 
+# fvec=numpy.vectorize(f)
+# xx,yy,zz=numpy.meshgrid(x,y,z)
+# m=numpy.absolute(c)
+#thankx git
+def hydrogen_wave_func(n, l, m, roa, Nx, Ny, Nz):
+  a = c.physical_constants["Bohr radius"][0]
+  plot = np.mgrid[-roa:roa:Nx*1j,-roa:roa:Ny*1j,-roa:roa:Nz*1j] #creates a 3D matrix containing all the points from -roa to roa, with the steps between each point determined by Nz,Ny or nx
+  xx, yy, zz = [ np.swapaxes(plot[i],0,1) for i in xrange(3) ] #performs matrix transformations and transposes values for the axes
+  rr, tt, pp = np.vectorize( cartesianToSpherical )( xx, yy, zz ) #passes all the arrays throug the cart to sphere func
+
+  fullwave = angular_wave_func(m,l,tt,pp)*radial_wave_func(n,l,rr*a)
+
+  mag = np.square( np.absolute( fullwave ) )  #psi square
+  return np.round(xx,5), np.round(yy,5), np.round(zz,5), np.round(mag,5)
 
 
+# print 'Test 1' 
+# x,y,z,mag=hydrogen_wave_func(2,1,0,8,2,2,2) 
+# print 'x, y, z:'
+# print x, y, z
+# print 'mag:'
+# print mag
+# print 'Test 2' 
+# x,y,z,mag=hydrogen_wave_func(2,1,1,5,3,4,2) 
+# print 'x, y, z:'
+# print x, y, z
+# print 'mag:'
+# print mag
+# print 'Test 3' 
+# x,y,z,mag=hydrogen_wave_func(1,0,0,10,20,20,20) 
+# print 'x, y, z:'
+# print x, y, z
+# print 'mag:'
+# print mag
 
 
+#Run pip install matplotlib
+x,y,z,mag=hydrogen_wave_func(2,1, 0,10,20,20,20)
+
+x.dump('xdata310.dat')
+y.dump('ydata310.dat')
+z.dump('zdata310.dat')
+mag.dump('density310.dat')
 
 
+import matplotlib.pyplot as plt
+from mpl_toolkits.mplot3d import Axes3D
 
-
-
-
-
+x = np.load('xdata310.dat')
+y = np.load('ydata310.dat')
+z = np.load('zdata310.dat')
+mag = np.load('density310.dat')
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+for a in range(0,len(mag)):
+  for b in range(0,len(mag)):
+    for c in range(0,len(mag)): 
+      ax.scatter(x[a][b][c],y[a][b][c],z[a][b][c], marker='o', alpha=(mag[a][b][c]/np.amax(mag)))
+plt.show()
 
 
 
