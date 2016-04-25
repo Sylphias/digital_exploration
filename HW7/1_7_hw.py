@@ -111,6 +111,7 @@ from scipy.special import legendre
 #     x = np.cos(theta)
 #     return ((1-x*x)**(np.absolute(m)/2.0))*derivative(x) # x is passed into the derivative and resolved
 #   return eqn_1
+
 def p00(theta):
   return 1
 
@@ -369,7 +370,7 @@ def hydrogen_wave_func(n, l, m, roa, Nx, Ny, Nz):
 
 
 #Run pip install matplotlib
-x,y,z,mag=hydrogen_wave_func(2,1, 0,10,20,20,20)
+x,y,z,mag=hydrogen_wave_func(1,0, 0,10,100,100,100)
 
 x.dump('xdata310.dat')
 y.dump('ydata310.dat')
