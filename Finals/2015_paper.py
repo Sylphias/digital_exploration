@@ -3,18 +3,34 @@ class Square():
     self.x = x
     self.y = y
     self.sideLength = sideLength
+
   def getCenter(self):
     return (self.x,self.y)
+
   def getSideLength(self):
     return (self.sideLength)
+
   def getArea(self):
     return self.sideLength**2
+
   def getPerimeter(self):
     return self.sideLength*4
+
   def containPoint(self,px,py):
-    return True if px >= (self.x-(self.sideLength/2.0)) and px <= (self.x+(self.sideLength/2.0)) and py >= (self.y-(self.sideLength/2.0)) and py <= (self.y+(self.sideLength/2.0)) else False
+    return px >= (self.x-(self.sideLength/2.0)) and \
+        px <= (self.x+(self.sideLength/2.0)) and \
+        py >= (self.y-(self.sideLength/2.0)) and \
+        py <= (self.y+(self.sideLength/2.0))
+
+    # return True if (condition) else False
+    # can be replaced by
+    # return (condition)
+
   def containSquare(self, inSquare):
-    return True if (inSquare.x - (inSquare.sideLength/2.0)) >= (self.x-(self.sideLength/2.0)) and (inSquare.x + (inSquare.sideLength/2.0))  <= (self.x+(self.sideLength/2.0)) and (inSquare.y - (inSquare.sideLength/2.0))  >= (self.y-(self.sideLength/2.0)) and (inSquare.x + (inSquare.sideLength/2.0))  <= (self.y+(self.sideLength/2.0)) else False
+    return (inSquare.x - (inSquare.sideLength/2.0)) >= (self.x-(self.sideLength/2.0)) and \
+        (inSquare.x + (inSquare.sideLength/2.0))  <= (self.x+(self.sideLength/2.0)) and \
+        (inSquare.y - (inSquare.sideLength/2.0))  >= (self.y-(self.sideLength/2.0)) and \
+        (inSquare.x + inSquare.sideLength/2.0)) <= (self.y+(self.sideLength/2.0))
 
 # s = Square(x=1,y=1, sideLength=2.0)
 # print s.getCenter()
@@ -32,31 +48,30 @@ class Square():
 # print s2.getPerimeter()
 
 from libdw import sm
+
 class Elevator(sm.SM):
   startState = 'First'
+
   def getNextValues(self, state, inp):
+    nextstate = state # nextstate is state by default, only modified if the following conditions happen
+
     if state == 'First':
-      nextstate = state
       if inp == 'Up':
         nextstate = 'Second'
-        return (nextstate, nextstate)
-      return (nextstate, nextstate)
 
     elif state == 'Second':
-      nextstate = state
       if inp == 'Up':
         nextstate = 'Third'
-        return (nextstate,nextstate)
       elif inp == 'Down':
         nextstate = 'First'
-        return (nextstate,nextstate)
-      return (nextstate,nextstate)
+
     elif state == 'Third':
-      nextstate = state
       if inp == 'Down':
         nextstate = 'Second'
-        return (nextstate,nextstate)
-      return (nextstate,nextstate)
+
+    return (nextstate, nextstate)
+
+    # use only one return per getNextValues in state machines
 
 
 # e = Elevator()
@@ -68,6 +83,7 @@ def countNumOpenLocker(K):
     for x in range(1,len(lockers)+1):
       if x%passNo == 0:
           lockers[x-1] = 0 if lockers[x-1] == 1 else 1
+          # lockers[x-1] = 1 - lockers[x-1]
   return len([r for r in lockers if r==1])
 
 # Factors of prime numbers
